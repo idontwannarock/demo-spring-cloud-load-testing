@@ -21,6 +21,7 @@
 		<module>demo-load-testing-zuul</module>
 		<module>demo-load-testing-app1</module>
 		<module>demo-load-testing-app2</module>
+		<module>demo-load-testing-security-config</module>
 	</modules>
 
 	<properties>
@@ -29,6 +30,30 @@
 		<java.version>1.8</java.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<jwt.version>0.9.0</jwt.version>
+		<guava.version>23.0</guava.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.example</groupId>
+				<artifactId>demo-load-testing-security-config</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<!--jwt-->
+			<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt</artifactId>
+				<version>${jwt.version}</version>
+			</dependency>
+			<!-- guava -->
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 </project>

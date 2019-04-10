@@ -14,7 +14,7 @@ public class HomeController {
     @Autowired
     private Environment env;
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<?> hello() {
         return ResponseEntity.ok("Hello World!");
     }

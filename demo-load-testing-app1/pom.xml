@@ -33,6 +33,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- Security configuration -->
+		<dependency>
+			<groupId>com.example</groupId>
+			<artifactId>demo-load-testing-security-config</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
