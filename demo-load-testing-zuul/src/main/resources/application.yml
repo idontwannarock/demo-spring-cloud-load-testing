@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: demo-load-testing-zuul
+  output:
+    ansi:
+      enabled: ALWAYS
+server:
+  port: 9100
+eureka:
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.cloud.client.ipAddress}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka/
+zuul:
+  routes:
+    api-customer:
+      path: /app1/**
+      serviceId: demo-load-testing-app1
+    api-customer-manage:
+      path: /app2/**
+      serviceId: demo-load-testing-app2
+  host:
+    maxTotalConnections: 10000
+    maxPerRouteConnections: 5000
+  semaphore:
+    max-semaphores: 5000
+hystrix:
+  command:
+    default:
+      coreSize: 500 # default 10
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000 # default 1000
+ribbon:
+  ReadTimeout: 20000

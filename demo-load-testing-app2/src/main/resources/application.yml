@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: demo-load-testing-app2
+  output:
+    ansi:
+      enabled: ALWAYS
+server:
+  port: 9201
+debug: true
+eureka:
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.cloud.client.ipAddress}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka/
