@@ -14,11 +14,13 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:9000/eureka/
 zuul:
+  ignoredServices: "*" # prevent zuul from auto mapping via serviceId
+  sensitive-headers: # does not clear any sensitive header
   routes:
-    api-customer:
+    app1:
       path: /app1/**
       serviceId: demo-load-testing-app1
-    api-customer-manage:
+    app2:
       path: /app2/**
       serviceId: demo-load-testing-app2
   host:

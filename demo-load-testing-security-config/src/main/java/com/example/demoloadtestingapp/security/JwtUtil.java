@@ -7,9 +7,9 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 import java.util.Date;
 
-class JwtUtil {
+public class JwtUtil {
 
-    static String createToken(String accountId, Collection<? extends GrantedAuthority> authorities) {
+    public static String createToken(String accountId, Collection<? extends GrantedAuthority> authorities) {
         return Jwts.builder()
                 .setSubject(accountId)
                 .claim(SecurityConstants.ROLES, authorities)

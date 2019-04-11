@@ -23,18 +23,24 @@ public class CustomWebSecurityConfiguration extends WebSecurityConfigurerAdapter
                 .cors().and().csrf().disable()
                 .headers().frameOptions().disable()
                 .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+                .and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.POST, SecurityConstants.LOGIN_URI).permitAll()
+                .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                .antMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()
+                .antMatchers(HttpMethod.GET, "/swagger-resources/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/v2/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/webjars/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 // Add a filter to validate user credentials and add token in the response header
                 .addFilter(new LoginAuthenticationFilter(authenticationManager()))
                 // Add a filter to validate jwt token for all requests
                 .addFilter(new JwtAuthorizationFilter(authenticationManager()))
-                .authorizeRequests()
-                .antMatchers(HttpMethod.POST, SecurityConstants.LOGIN_URI).permitAll()
-                .anyRequest().authenticated();
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        ;
     }
 
     // Spring has UserDetailsService interface, which can be overridden to provide
